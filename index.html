@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyaOS</title>
+  <meta name="description" content="MyaOS — an operating system that runs programs from different OSes out of the box.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      var saved = localStorage.getItem("theme");
+      var theme =
+        saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="header">
+    <div class="wrapper header-row">
+      <a class="logo" href="https://myaos.dev">
+        <span class="logo-frame">
+          <img class="logo-img" src="logo.svg" alt="MyaOS logo" width="28">
+        </span>
+        <span class="logo-text">MyaOS</span>
+      </a>
+      <nav class="header-nav">
+        <a href="#about">About</a>
+        <a href="#goal">Goal</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#why">Why</a>
+        <a href="https://github.com/myaos-dev/myaos">GitHub</a>
+        <a href="https://github.com/myaos-dev/myaos/releases">Releases</a>
+      </nav>
+      <div class="header-actions">
+        <button class="lang-toggle" id="langToggle" type="button" data-target="ru.html" aria-label="Переключить на русский">РУ</button>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme"></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="wrapper">
+        <h1>MyaOS</h1>
+        <p>An operating system that runs programs from different OSes right out of the box.</p>
+        <p class="muted">Written from scratch: its own UEFI bootloader, its own kernel, built-in support for formats like .sh, .exe, .app, .AppImage, .msi and more.</p>
+        <p class="links">
+          <a href="https://github.com/myaos-dev/myaos">Source code</a>
+          ·
+          <a href="https://github.com/myaos-dev/myaos/releases">Download</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrapper">
+        <h2>About</h2>
+        <p class="muted">
+          MyaOS is an operating system built from scratch: its own UEFI bootloader, its own kernel
+          and built-in support for executable formats from other operating systems.
+          The user doesn't need to think about which system a program was built for — MyaOS just runs it.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="goal">
+      <div class="wrapper">
+        <h2>Goal</h2>
+        <p class="muted">
+          An operating system with out-of-the-box (Out-of-Box) support for programs from different OSes —
+          without installing extra software and without dealing with executable file types.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="roadmap">
+      <div class="wrapper">
+        <h2>Development roadmap</h2>
+
+        <h3>Boot and kernel</h3>
+        <ul>
+          <li>Study the UEFI architecture</li>
+          <li>Write a UEFI bootloader</li>
+          <li>Study how existing kernels work</li>
+          <li>Write our own kernel</li>
+        </ul>
+
+        <h3>Scheduler</h3>
+        <ul>
+          <li>Round Robin multitasking</li>
+        </ul>
+
+        <h3>Executable formats</h3>
+
+        <div class="formats">
+          <div class="formats-panel" id="formatsPanel">
+            <div class="slide active" data-format="elf">
+              <h4>ELF<span class="slide-badge">In progress</span></h4>
+              <p class="slide-note">Executable and Linkable Format — the standard format for executables and shared objects on Unix/Linux.</p>
+              <h5 class="slide-tasks">What needs to be done?</h5>
+              <ul>
+                <li>Study the ELF architecture</li>
+                <li>Write a parser</li>
+                <li>Write an executor</li>
+              </ul>
+            </div>
+
+            <div class="slide" data-format="pec">
+              <h4>PE/COFF<span class="slide-badge">In progress</span></h4>
+              <p class="slide-note">Portable Executable / Common Object File Format — the executable format for Windows (.exe, .dll, .sys).</p>
+              <h5 class="slide-tasks">What needs to be done?</h5>
+              <ul>
+                <li>Study the PE/COFF architecture</li>
+                <li>Write a parser</li>
+                <li>Write an executor</li>
+              </ul>
+            </div>
+
+            <div class="slide" data-format="mach">
+              <h4>Mach-O<span class="slide-badge">In progress</span></h4>
+              <p class="slide-note">Mach Object — the executable format for macOS and iOS.</p>
+              <h5 class="slide-tasks">What needs to be done?</h5>
+              <ul>
+                <li>Study the Mach-O architecture</li>
+                <li>Write a parser</li>
+                <li>Write an executor</li>
+              </ul>
+            </div>
+
+            <div class="slide" data-format="mz">
+              <h4>MZ<span class="slide-badge">In progress</span></h4>
+              <p class="slide-note">The legacy DOS executable format. Studied for the hardware hypervisor with a DOS system.</p>
+              <h5 class="slide-tasks">What needs to be done?</h5>
+              <ul>
+                <li>Study the MZ architecture</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="formats-nav">
+            <button class="formats-arrow" id="prevFormat" type="button" aria-label="Previous format">←</button>
+            <div class="formats-tabs" id="formatsTabs">
+              <button type="button" class="active" data-index="0">ELF</button>
+              <button type="button" data-index="1">PE/COFF</button>
+              <button type="button" data-index="2">Mach-O</button>
+              <button type="button" data-index="3">MZ</button>
+            </div>
+            <button class="formats-arrow" id="nextFormat" type="button" aria-label="Next format">→</button>
+          </div>
+        </div>
+
+        <h3>Hypervisor</h3>
+        <ul>
+          <li>Study hardware hypervisor architectures</li>
+          <li>Implement a hardware hypervisor with a DOS system</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="wrapper">
+        <h2>Why it matters</h2>
+        <p class="muted">
+          Today there is no operating system with built-in support for programs from other OSes.
+          This is inconvenient for ordinary users who don't understand executable file formats
+          and don't want to deal with platform specifics.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="download" id="download">
+    <div class="wrapper">
+      <h2>Download MyaOS</h2>
+      <p class="muted">Grab the latest build from the releases page.</p>
+      <p class="links">
+        <a class="btn" href="https://github.com/myaos-dev/myaos/releases">Download</a>
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrapper footer-row">
+      <div class="footer-col">
+        <span class="footer-title">Developers</span>
+        <a href="#">team@myaos.example</a>
+        <a href="#">@myaos (placeholder)</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-title">Project</span>
+        <a href="https://github.com/myaos-dev/myaos">MyaOS on GitHub</a>
+        <a href="#">Site source code (placeholder)</a>
+      </div>
+    </div>
+    <div class="wrapper footer-bar">
+      <span>© 2026 MyaOS Project</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

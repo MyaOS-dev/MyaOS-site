@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyaOS</title>
+  <meta name="description" content="MyaOS — операционная система с запуском программ из разных ОС из коробки.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      var saved = localStorage.getItem("theme");
+      var theme =
+        saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="header">
+    <div class="wrapper header-row">
+      <a class="logo" href="https://myaos.dev">
+        <span class="logo-frame">
+          <img class="logo-img" src="logo.svg" alt="Логотип MyaOS" width="28">
+        </span>
+        <span class="logo-text">MyaOS</span>
+      </a>
+      <nav class="header-nav">
+        <a href="#about">О проекте</a>
+        <a href="#goal">Цель</a>
+        <a href="#roadmap">Этапы</a>
+        <a href="#why">Актуальность</a>
+        <a href="https://github.com/myaos-dev/myaos">GitHub</a>
+        <a href="https://github.com/myaos-dev/myaos/releases">Релизы</a>
+      </nav>
+      <div class="header-actions">
+        <button class="lang-toggle" id="langToggle" type="button" data-target="index.html" aria-label="Switch to English">EN</button>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему"></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="wrapper">
+        <h1>MyaOS</h1>
+        <p>Операционная система, которая запускает программы из разных ОС прямо из коробки.</p>
+        <p class="muted">Написана с нуля: свой UEFI-загрузчик, своё ядро, встроенная поддержка форматов .sh, .exe, .app, .AppImage, .msi и других.</p>
+        <p class="links">
+          <a href="https://github.com/myaos-dev/myaos">Исходный код</a>
+          ·
+          <a href="https://github.com/myaos-dev/myaos/releases">Скачать</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrapper">
+        <h2>О проекте</h2>
+        <p class="muted">
+          MyaOS — операционная система, разрабатываемая с нуля: собственный UEFI-загрузчик,
+          собственное ядро и встроенная поддержка форматов исполняемых файлов из других операционных систем.
+          Пользователю не нужно думать, для какой системы собрана программа, — MyaOS просто её запускает.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="goal">
+      <div class="wrapper">
+        <h2>Цель</h2>
+        <p class="muted">
+          Операционная система с поддержкой программ из разных ОС из коробки (Out-of-Box),
+          без установки дополнительного ПО и без разбирательств с типами исполняемых файлов.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="roadmap">
+      <div class="wrapper">
+        <h2>Этапы разработки</h2>
+
+        <h3>Загрузка и ядро</h3>
+        <ul>
+          <li>Изучить архитектуру UEFI</li>
+          <li>Написать UEFI-загрузчик</li>
+          <li>Изучить работу существующих ядер</li>
+          <li>Написать собственное ядро</li>
+        </ul>
+
+        <h3>Планировщик</h3>
+        <ul>
+          <li>Многозадачность на базе Round Robin</li>
+        </ul>
+
+        <h3>Форматы исполняемых файлов</h3>
+
+        <div class="formats">
+          <div class="formats-panel" id="formatsPanel">
+            <div class="slide active" data-format="elf">
+              <h4>ELF<span class="slide-badge">В работе</span></h4>
+              <p class="slide-note">Executable and Linkable Format — стандартный формат исполняемых файлов и общих объектов в Unix/Linux.</p>
+              <h5 class="slide-tasks">Что требуется сделать?</h5>
+              <ul>
+                <li>Изучить архитектуру ELF</li>
+                <li>Написать парсер</li>
+                <li>Написать executor</li>
+              </ul>
+            </div>
+
+            <div class="slide" data-format="pec">
+              <h4>PE/COFF<span class="slide-badge">В работе</span></h4>
+              <p class="slide-note">Portable Executable / Common Object File Format — формат исполняемых файлов Windows (.exe, .dll, .sys).</p>
+              <h5 class="slide-tasks">Что требуется сделать?</h5>
+              <ul>
+                <li>Изучить архитектуру PE/COFF</li>
+                <li>Написать парсер</li>
+                <li>Написать executor</li>
+              </ul>
+            </div>
+
+            <div class="slide" data-format="mach">
+              <h4>Mach-O<span class="slide-badge">В работе</span></h4>
+              <p class="slide-note">Mach Object — формат исполняемых файлов macOS и iOS.</p>
+              <h5 class="slide-tasks">Что требуется сделать?</h5>
+              <ul>
+                <li>Изучить архитектуру Mach-O</li>
+                <li>Написать парсер</li>
+                <li>Написать executor</li>
+              </ul>
+            </div>
+
+            <div class="slide" data-format="mz">
+              <h4>MZ<span class="slide-badge">В работе</span></h4>
+              <p class="slide-note">Исторический формат DOS-исполняемых файлов. Изучается для работы аппаратного гипервизора с DOS-системой.</p>
+              <h5 class="slide-tasks">Что требуется сделать?</h5>
+              <ul>
+                <li>Изучить архитектуру MZ</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="formats-nav">
+            <button class="formats-arrow" id="prevFormat" type="button" aria-label="Предыдущий формат">←</button>
+            <div class="formats-tabs" id="formatsTabs">
+              <button type="button" class="active" data-index="0">ELF</button>
+              <button type="button" data-index="1">PE/COFF</button>
+              <button type="button" data-index="2">Mach-O</button>
+              <button type="button" data-index="3">MZ</button>
+            </div>
+            <button class="formats-arrow" id="nextFormat" type="button" aria-label="Следующий формат">→</button>
+          </div>
+        </div>
+
+        <h3>Гипервизор</h3>
+        <ul>
+          <li>Изучить архитектуру аппаратных гипервизоров</li>
+          <li>Реализовать аппаратный гипервизор с DOS-системой</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="wrapper">
+        <h2>Актуальность</h2>
+        <p class="muted">
+          На сегодняшний день нет операционных систем с поддержкой программ из других ОС из коробки.
+          Это неудобно для обычных пользователей, которые не разбираются в типах исполняемых файлов
+          и не хотят вникать в особенности каждой платформы.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="download" id="download">
+    <div class="wrapper">
+      <h2>Скачать MyaOS</h2>
+      <p class="muted">Последняя версия на странице релизов.</p>
+      <p class="links">
+        <a class="btn" href="https://github.com/myaos-dev/myaos/releases">Скачать</a>
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrapper footer-row">
+      <div class="footer-col">
+        <span class="footer-title">Контакты разработчиков</span>
+        <a href="#">team@myaos.example</a>
+        <a href="#">@myaos (placeholder)</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-title">Проект</span>
+        <a href="https://github.com/myaos-dev/myaos">MyaOS на GitHub</a>
+        <a href="#">Исходный код сайта (placeholder)</a>
+      </div>
+    </div>
+    <div class="wrapper footer-bar">
+      <span>© 2026 MyaOS Project</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
